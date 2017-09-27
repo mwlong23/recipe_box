@@ -19,25 +19,26 @@ post('/recipes') do
   title = params['title']
   instructions = params['instructions']
   rating = params['rating']
-  @recipe = Recipe.create({title: title, instructions: instructions, rating: rating})
+  @recipe = Recipe.new({title: title, instructions: instructions, rating: rating})
+  @recipe.save()
   erb(:recipe)
 end
 
 get('/recipes/:id') do
   @ingredients = Ingredient.all
-  @instructions = Instruction.all
-  @recipe = recipe.find(params[:id].to_i)
-  erb(:recipe)
-end
-
-post('/recipes/:id') do
-  instructions = params['instructions']
-  @ingredients = Ingredient.all
+  # @instructions = Instruction.all
   @recipe = Recipe.find(params[:id].to_i)
   erb(:recipe)
 end
 
-# get('/ingredients/:id') do
-#   @ingredient = ingredient.find(params['id'])
-#   erb(:ingredient)
-# end
+post('/recipes/:id') do
+
+  instructions = params['instructions']
+  ingredient = params['ingredient']
+  @ingredient = Ingredient.new({name: ingredient})
+  @ingredient.save()
+  @recipe = Recipe.find(params[:id].to_i)
+  @recipe.ingredients.push(@ingredient)
+  @recipe.save
+  redirect "/recipes/#{@recipe.id}"
+end
