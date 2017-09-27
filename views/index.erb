@@ -1,0 +1,35 @@
+<h1>Recipe Builder</h1>
+
+<form  action="/recipes" method="post" class="form-group">
+  <label for="title">Name your recipe</label>
+  <input type="text" name="title" class="form-control">
+  <br>
+  <div class="form-group">
+    <label for="instructions">Enter your instructions</label>
+    <textarea class="form-control" rows="5" name="instructions"></textarea>
+  </div>
+  <br>
+  <label for="rating">Add Rating</label>
+  <select name="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+  <br>
+  <br>
+  <button type="submit" class="btn">Add Recipe</button>
+</form>
+
+<h3>Your Recipes</h3>
+
+<% if @recipes.any? %>
+  <% @recipes.each do |recipe| %>
+  <ul>
+    <li><a href="/recipes/ <%=recipe.id %>"><%=recipe.title %></a></li>
+  </ul>
+  <% end %>
+<% else %>
+  <p>There are no recipes yet.</p>
+<% end %>

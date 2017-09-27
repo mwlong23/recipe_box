@@ -1,0 +1,25 @@
+
+<div class="well">
+  <h1><%= @recipe.title %></h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h3>Your Ingredients</h3>
+
+  </div>
+  <div class="col-sm-6">
+    <form class="form-group" action="/recipes/<%= @recipe.id %>" method="post">
+      <label for="ingredient">Add Ingredients</label>
+      <br>
+      <input type="text" name="ingredient" class="form-control">
+      <br>
+      <button type="submit" class="btn btn-primary" name="button">Add Ingredients</button>
+    </form>
+    <form class="form-group" action="/recipes/<%= @recipe.id %>" method="post">
+      <textarea name="instructions" rows="8" cols="80"> <%= @recipe.instructions %> </textarea>
+      <br>
+      <button type="submit" class="btn btn-primary" name="button">Edit Instructions</button>
+    </form>
+  </div>
+</div>
