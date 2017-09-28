@@ -6,7 +6,17 @@
 <div class="row">
   <div class="col-sm-6">
 
+    <h3>Your ingredients</h3>
 
+    <% if @recipe.ingredient.any? %>
+      <% @recipe.ingredient.each do |i| %>
+      <ul>
+        <li><a href="/recipes/<%=@recipe.id %>"><%= i.name %></a></li>
+      </ul>
+      <% end %>
+    <% else %>
+      <p>There are no ingredients yet.</p>
+    <% end %>
 
   </div>
   <div class="col-sm-6">
@@ -17,6 +27,8 @@
       <br>
       <button type="submit" class="btn btn-primary" name="button">Add Ingredients</button>
     </form>
+
+    
     <form class="form-group" action="/recipes/<%= @recipe.id %>" method="post">
       <textarea name="instructions" rows="8" cols="80"> <%= @recipe.instructions %> </textarea>
       <br>

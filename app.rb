@@ -32,13 +32,13 @@ get('/recipes/:id') do
 end
 
 post('/recipes/:id') do
-
   instructions = params['instructions']
   ingredient = params['ingredient']
   @ingredient = Ingredient.new({name: ingredient})
   @ingredient.save()
   @recipe = Recipe.find(params[:id].to_i)
-  @recipe.ingredients.push(@ingredient)
+  @recipe.ingredient.push(@ingredient)
+  # binding.pry
   @recipe.save
   redirect "/recipes/#{@recipe.id}"
 end
