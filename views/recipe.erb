@@ -1,17 +1,22 @@
-
 <div class="well">
   <h1><%= @recipe.title %></h1>
 </div>
 
 <div class="row">
   <div class="col-sm-6">
+    <h3><a href="/">Recipes List</a></h3>
 
     <h3>Your ingredients</h3>
 
     <% if @recipe.ingredient.any? %>
       <% @recipe.ingredient.each do |i| %>
       <ul>
-        <li><a href="/ingredient_edit/<%=i.id %>"><%= i.name %></a></li>
+        <form class="form-group" action="/ingredient_edit/<%= @recipe.id %>" method="get">
+          <input id="ingredient_id" name="ingredient_id" type="hidden" value="<%= i.id%>">
+          <li><%= i.name %></li>
+          <button class="btn btn-primary" type="submit" name="button">Edit</button>
+          <button class="btn btn-danger" type="submit" name="button">Delete</button>
+        </form>
       </ul>
       <% end %>
     <% else %>
@@ -23,6 +28,7 @@
   </div>
   <div class="col-sm-6">
     <form class="form-group" action="/recipes/<%= @recipe.id %>" method="post">
+      <!-- <input id="recipe_id" name="recipe_id" type="hidden" value="<%= @recipe.id%>"> -->
       <label for="ingredient">Add Ingredients</label>
       <br>
       <input type="text" name="ingredient" class="form-control">
@@ -32,6 +38,7 @@
 
 
     <form class="form-group" action="/recipes/<%= @recipe.id %>" method="post">
+      <!-- <input id="recipe_id" name="recipe_id" type="hidden" value="<%= @recipe.id%>"> -->
       <input type="hidden" name="_method" value="patch">
       <textarea name="instructions" rows="8" cols="80"> <%= @recipe.instructions %> </textarea>
       <br>

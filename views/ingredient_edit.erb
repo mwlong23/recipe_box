@@ -1,16 +1,22 @@
 <h2>Edit your ingredient "<%=@ingredient.name %>"</h2>
+<% @recipe %>
+<% @ingredient_id %>
 
-<form class="form-group" action="index.html" method="post">
+<form class="form-group" action='/ingredient_edit/<%=@recipe.id %>' method="post">
   <input type="hidden" name="_method" value="patch">
+  <input id="recipe_id" name="recipe_id" type="hidden" value="<%= @recipe.id%>">
+  <input id="recipe_id" name="ingredient_id" type="hidden" value="<%= @ingredient.id %>">
   <label for="update_ingredient">Edit your ingredient</label>
   <input type="text" name="update_ingredient" class="form-control">
   <br>
   <button type="submit" name="button" class="btn btn-primary">Edit</button>
 </form>
 
-<form class="form-group" action="index.html" method="post">
-  <input type="hidden" name="_method" value="patch">
+<form class="form-group" action='/ingredient_edit/<%=@recipe.id %>' method="post">
+  <input id="recipe_id" name="recipe_id" type="hidden" value="<%= @recipe.id%>">
+  <input id="recipe_id" name="ingredient_id" type="hidden" value="<%= @ingredient.id%>">
+  <input type="hidden" name="_method" value="delete">
   <button type="submit" name="button" class="btn btn-danger">Delete</button>
 </form>
 
-<a href="/recipe/">Return to recipe</a>
+<a href="/recipe/<%= @recipe.id %>">Return to recipe</a>

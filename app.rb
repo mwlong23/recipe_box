@@ -50,12 +50,34 @@ patch('/recipes/:id') do
 end
 
 get('/ingredient_edit/:id') do
-  @ingredient = Ingredient.find(params[:id].to_i)
+  recipe_id = params['id']
+  ingredient_id = params['ingredient_id']
+  @recipe = Recipe.find(recipe_id)
+  @ingredient = Ingredient.find(ingredient_id)
   erb(:ingredient_edit)
 end
 
-# patch('/ingredient_edit/:id') do
-#   @ingredient = Ingredient.find(params[:id].to_i)
-#   @recipe = Recipe.find(params[:id].to_i)
-#   redirect "/recipes/#{@recipe.id}"
-# end
+patch('/ingredient_edit/:id') do
+
+  update_ingredient = params['update_ingredient']
+  @recipe_id = params['id']
+  @ingredient_id = params['ingredient_id']
+  @recipe = Recipe.find(@recipe_id)
+  @ingredient = Ingredient.find(@ingredient_id)
+  updated_ingredient = @ingredient.update({name: update_ingredient})
+      # binding.pry
+  redirect "/recipes/#{@recipe.id}"
+
+end
+
+delete('/ingredient_edit/:id') do
+  update_ingredient = params['update_ingredient']
+  @recipe_id = params[:id]
+  @ingredient_id = params['ingredient_id']
+  this_ingredient = Ingredient.find(@ingredient_id)
+
+  @recipe = Recipe.find(@recipe_id)
+  @recipe.ingredient.destroy(this_ingredient)
+
+redirect "/recipes/#{@recipe.id}"
+end
