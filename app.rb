@@ -32,13 +32,30 @@ get('/recipes/:id') do
 end
 
 post('/recipes/:id') do
-  instructions = params['instructions']
-  ingredient = params['ingredient']
-  @ingredient = Ingredient.new({name: ingredient})
-  @ingredient.save()
+    ingredient = params['ingredient']
+    @ingredient = Ingredient.new({name: ingredient})
+    @ingredient.save()
+    @recipe = Recipe.find(params[:id].to_i)
+    @recipe.ingredient.push(@ingredient)
+    @recipe.save
+    redirect "/recipes/#{@recipe.id}"
+end
+
+patch('/recipes/:id') do
+  instruction = params['instructions']
   @recipe = Recipe.find(params[:id].to_i)
-  @recipe.ingredient.push(@ingredient)
-  # binding.pry
+  @recipe.instructions = instruction
   @recipe.save
   redirect "/recipes/#{@recipe.id}"
 end
+
+get('/ingredient_edit/:id') do
+  @ingredient = Ingredient.find(params[:id].to_i)
+  erb(:ingredient_edit)
+end
+
+# patch('/ingredient_edit/:id') do
+#   @ingredient = Ingredient.find(params[:id].to_i)
+#   @recipe = Recipe.find(params[:id].to_i)
+#   redirect "/recipes/#{@recipe.id}"
+# end

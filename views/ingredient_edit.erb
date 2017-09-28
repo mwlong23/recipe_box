@@ -1,0 +1,16 @@
+<h2>Edit your ingredient "<%=@ingredient.name %>"</h2>
+
+<form class="form-group" action="index.html" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="update_ingredient">Edit your ingredient</label>
+  <input type="text" name="update_ingredient" class="form-control">
+  <br>
+  <button type="submit" name="button" class="btn btn-primary">Edit</button>
+</form>
+
+<form class="form-group" action="index.html" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <button type="submit" name="button" class="btn btn-danger">Delete</button>
+</form>
+
+<a href="/recipe/">Return to recipe</a>

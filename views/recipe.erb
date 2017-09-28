@@ -11,12 +11,14 @@
     <% if @recipe.ingredient.any? %>
       <% @recipe.ingredient.each do |i| %>
       <ul>
-        <li><a href="/recipes/<%=@recipe.id %>"><%= i.name %></a></li>
+        <li><a href="/ingredient_edit/<%=i.id %>"><%= i.name %></a></li>
       </ul>
       <% end %>
     <% else %>
       <p>There are no ingredients yet.</p>
     <% end %>
+    <h3>Instructions:</h3>
+    <%= @recipe.instructions %>
 
   </div>
   <div class="col-sm-6">
@@ -28,8 +30,9 @@
       <button type="submit" class="btn btn-primary" name="button">Add Ingredients</button>
     </form>
 
-    
+
     <form class="form-group" action="/recipes/<%= @recipe.id %>" method="post">
+      <input type="hidden" name="_method" value="patch">
       <textarea name="instructions" rows="8" cols="80"> <%= @recipe.instructions %> </textarea>
       <br>
       <button type="submit" class="btn btn-primary" name="button">Edit Instructions</button>
