@@ -32,13 +32,13 @@ get('/recipes/:id') do
 end
 
 post('/recipes/:id') do
-    ingredient = params['ingredient']
-    @ingredient = Ingredient.new({name: ingredient})
-    @ingredient.save()
-    @recipe = Recipe.find(params[:id].to_i)
-    @recipe.ingredient.push(@ingredient)
-    @recipe.save
-    redirect "/recipes/#{@recipe.id}"
+  ingredient = params['ingredient']
+  @ingredient = Ingredient.new({name: ingredient})
+  @ingredient.save()
+  @recipe = Recipe.find(params[:id].to_i)
+  @recipe.ingredient.push(@ingredient)
+  @recipe.save
+  redirect "/recipes/#{@recipe.id}"
 end
 
 patch('/recipes/:id') do
@@ -58,16 +58,13 @@ get('/ingredient_edit/:id') do
 end
 
 patch('/ingredient_edit/:id') do
-
   update_ingredient = params['update_ingredient']
   @recipe_id = params['id']
   @ingredient_id = params['ingredient_id']
   @recipe = Recipe.find(@recipe_id)
   @ingredient = Ingredient.find(@ingredient_id)
   updated_ingredient = @ingredient.update({name: update_ingredient})
-      # binding.pry
   redirect "/recipes/#{@recipe.id}"
-
 end
 
 delete('/ingredient_edit/:id') do
@@ -75,9 +72,7 @@ delete('/ingredient_edit/:id') do
   @recipe_id = params[:id]
   @ingredient_id = params['ingredient_id']
   this_ingredient = Ingredient.find(@ingredient_id)
-
   @recipe = Recipe.find(@recipe_id)
   @recipe.ingredient.destroy(this_ingredient)
-
-redirect "/recipes/#{@recipe.id}"
+  redirect "/recipes/#{@recipe.id}"
 end

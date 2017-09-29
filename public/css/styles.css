@@ -1,0 +1,17 @@
+/*form .btn{
+  display: inline-block;
+  margin: 10px
+}*/
+
+ul {
+  list-style-type: none;
+}
+
+
+.jumbotron{
+  background-color: tan;
+}
+
+.btn {
+  text-align: top;
+}

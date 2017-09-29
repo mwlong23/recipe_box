@@ -11,12 +11,18 @@
     <% if @recipe.ingredient.any? %>
       <% @recipe.ingredient.each do |i| %>
       <ul>
-        <form class="form-group" action="/ingredient_edit/<%= @recipe.id %>" method="get">
-          <input id="ingredient_id" name="ingredient_id" type="hidden" value="<%= i.id%>">
+        <div class="ingredient">
           <li><%= i.name %></li>
-          <button class="btn btn-primary" type="submit" name="button">Edit</button>
-          <button class="btn btn-danger" type="submit" name="button">Delete</button>
-        </form>
+          <form class="form-group" action="/ingredient_edit/<%= @recipe.id %>" method="get">
+            <input id="ingredient_id" name="ingredient_id" type="hidden" value="<%= i.id%>">
+            <button class="action pull-right btn btn-primary" type="submit" name="button">Edit</button>
+          </form>
+          <form class="form-group" action='/ingredient_edit/<%=@recipe.id %>' method="post">
+            <input id="recipe_id" name="ingredient_id" type="hidden" value="<%= i.id%>">
+            <input type="hidden" name="_method" value="delete">
+            <button class="action pull-right btn btn-danger" type="submit" name="button" >Delete</button>
+          </form>
+        </div>
       </ul>
       <% end %>
     <% else %>
@@ -28,7 +34,6 @@
   </div>
   <div class="col-sm-6">
     <form class="form-group" action="/recipes/<%= @recipe.id %>" method="post">
-      <!-- <input id="recipe_id" name="recipe_id" type="hidden" value="<%= @recipe.id%>"> -->
       <label for="ingredient">Add Ingredients</label>
       <br>
       <input type="text" name="ingredient" class="form-control">
